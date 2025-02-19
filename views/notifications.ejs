@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications</title>
+    <link rel="stylesheet" href="/public/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Notifications</h1>
+        <nav>
+            <a href="/dashboard">Dashboard</a>
+            <a href="/doctors">Find a Doctor</a>
+            <a href="/bookings">My Appointments</a>
+            <a href="/logout">Logout</a>
+        </nav>
+    </header>
+    <main>
+        <h2>Your Notifications</h2>
+        
+        <% if (notifications.length === 0) { %>
+            <p>No new notifications at the moment.</p>
+        <% } else { %>
+            <ul>
+                <% notifications.forEach(notification => { %>
+                    <li class="notification-item">
+                        <p><%= notification.message %></p>
+                        <p><small><%= new Date(notification.date).toLocaleString() %></small></p>
+                    </li>
+                <% }); %>
+            </ul>
+        <% } %>
+        
+    </main>
+    <footer>
+        <p>&copy; 2025 Doctor Booking System</p>
+    </footer>
+</body>
+</html>

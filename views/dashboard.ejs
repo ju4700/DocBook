@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/public/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome, <%= user.email %></h1>
+        <nav>
+            <a href="/doctors">Find a Doctor</a>
+            <a href="/bookings">My Appointments</a>
+            <a href="/notifications">Notifications</a>
+            <a href="/logout">Logout</a>
+        </nav>
+    </header>
+    <main>
+        <h2>Your Dashboard</h2>
+        <p>Manage your appointments and view notifications.</p>
+
+        <h3>Upcoming Appointments</h3>
+        <% if (bookings.length > 0) { %>
+            <ul>
+                <% bookings.forEach(booking => { %>
+                    <li>
+                        <strong>Dr. <%= booking.doctorName %></strong> 
+                        <em>(<%= booking.doctorSpecialization %>)</em>
+                        <br>
+                        Appointment Date: <%= booking.date %> 
+                        <br>
+                        Status: <%= booking.status %>
+                    </li>
+                <% }); %>
+            </ul>
+        <% } else { %>
+            <p>You don't have any upcoming appointments. Please <a href="/doctors">book a doctor</a>.</p>
+        <% } %>
+    </main>
+    <footer>
+        <p>&copy; 2025 Doctor Booking System</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Booking System</title>
+    <link rel="stylesheet" href="/public/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to the Doctor Booking System</h1>
+        <nav>
+            <% if (user) { %>  <!-- If user is logged in -->
+                <a href="/dashboard">Dashboard</a>
+                <a href="/logout">Logout</a>
+            <% } else { %>  <!-- If user is not logged in -->
+                <a href="/login">Login</a>
+                <a href="/signup">Sign Up</a>
+            <% } %>
+            <a href="/doctors">Find a Doctor</a>
+        </nav>
+    </header>
+    <main>
+        <h2>Book an Appointment with Certified Doctors</h2>
+        <p>Browse through a list of highly qualified doctors and schedule your appointment online.</p>
+        <a href="/doctors" class="cta-btn">Browse Doctors</a>
+    </main>
+    <footer>
+        <p>&copy; 2025 Doctor Booking System</p>
+    </footer>
+</body>
+</html>
