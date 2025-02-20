@@ -1,26 +1,19 @@
 const express = require('express');
-const { db } = require('../firebase');
-const { collection, getDocs } = require('firebase/firestore');
-
+const Doctor = require('../models/Doctor'); // Import the Doctor model
 const router = express.Router();
 
 router.get('/', async (req, res) => {
     try {
-        const doctorsRef = collection(db, "doctors");
-        const snapshot = await getDocs(doctorsRef);
+        // Fetch all doctors from MongoDB
+        const doctors = await Doctor.find();
 
-        if (snapshot.empty) {
+        if (!doctors.length) {
             return res.render('doctors', { doctors: [], message: "No doctors available at the moment." });
         }
 
-        let doctors = [];
-        snapshot.forEach(doc => {
-            doctors.push({ id: doc.id, ...doc.data() });
-        });
-
         res.render('doctors', { doctors });
     } catch (error) {
-        console.error("Firestore Error:", error);
+        console.error("MongoDB Error:", error);
         res.status(500).send("Error fetching doctors.");
     }
 });

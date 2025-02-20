@@ -1,7 +1,6 @@
 const express = require('express');
 const multer = require('multer');
-const { db } = require('../firebase');
-const { collection, addDoc } = require('firebase/firestore');
+const Booking = require('../models/Booking.js'); // Import the Booking model
 const router = express.Router();
 
 // Configure Multer for file uploads
@@ -17,13 +16,15 @@ router.post('/new/:doctorId', upload.single('report'), async (req, res) => {
     }
 
     try {
-        // Add booking to Firestore
-        await addDoc(collection(db, "bookings"), {
+        // Create new booking in MongoDB
+        const newBooking = new Booking({
             doctorId,
             userId,
             date,
             file: req.file.filename
         });
+
+        await newBooking.save();
 
         // Redirect user to bookings page or show success message
         res.redirect('/bookings');
