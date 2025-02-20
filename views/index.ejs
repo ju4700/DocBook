@@ -4,28 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doctor Booking System</title>
-    <link rel="stylesheet" href="/public/styles.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Font (IBM Plex Sans for a professional medical feel) -->
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'IBM Plex Sans', sans-serif;
+        }
+    </style>
 </head>
-<body>
-    <header>
-        <h1>Welcome to the Doctor Booking System</h1>
-        <nav>
-            <% if (typeof user !== 'undefined' && user) { %> 
-                <a href="/dashboard">Dashboard</a>
-                <a href="/logout">Logout</a>
-            <% } else { %> 
-                <a href="/login">Login</a>
-                <a href="/register">Register</a>
-            <% } %>
-        </nav>
-    </header>
-    <main>
-        <h2>Book an Appointment with Certified Doctors</h2>
-        <p>Browse through a list of highly qualified doctors and schedule your appointment online.</p>
-        <a href="/doctors" class="cta-btn">Browse Doctors</a>
-    </main>
-    <footer>
-        <p>&copy; 2025 Doctor Booking System</p>
-    </footer>
+<body class="bg-gray-50 text-gray-900">
+
+    <!-- Container for proper spacing -->
+    <div class="max-w-4xl mx-auto px-6 py-12">
+
+        <!-- Header -->
+        <header class="bg-white shadow-md rounded-lg p-4 mb-8">
+            <div class="flex justify-between items-center">
+                <h1 class="text-3xl font-bold text-blue-600">Doctor Booking</h1>
+                <nav class="space-x-4">
+                    <% if (typeof user !== 'undefined' && user) { %> 
+                        <a href="/dashboard" class="text-gray-700 hover:text-blue-500">Dashboard</a>
+                        <a href="/logout" class="text-gray-700 hover:text-red-500">Logout</a>
+                    <% } else { %> 
+                        <a href="/login" class="text-gray-700 hover:text-blue-500">Login</a>
+                        <a href="/register" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">
+                            Sign Up
+                        </a>
+                    <% } %>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="bg-white shadow-lg rounded-lg p-8 text-center">
+            <h2 class="text-4xl font-semibold">Book an Appointment</h2>
+            <p class="text-gray-600 mt-2">Browse through a list of highly qualified doctors and schedule your appointment online.</p>
+            <a href="/doctors" class="mt-6 inline-block bg-blue-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-600 transition">
+                Browse Doctors
+            </a>
+        </main>
+
+        <!-- Footer -->
+        <footer class="text-center text-gray-500 text-sm mt-10">
+            <p>&copy; 2025 Doctor Booking System</p>
+        </footer>
+
+    </div>
+
 </body>
 </html>
