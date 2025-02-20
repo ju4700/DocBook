@@ -11,8 +11,12 @@ const isAuthenticated = (req, res, next) => {
     res.redirect('/login');
 };
 
-router.get('/login', (req, res) => res.render('login'));
+// Render login page
+router.get("/login", (req, res) => {
+    res.render("login", { title: "Login", error: null });
+});
 
+// Handle login
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
     try {
@@ -28,25 +32,29 @@ router.post('/login', async (req, res) => {
         } else {
             errorMessage += error.message;
         }
-        res.render('login', { error: errorMessage });
+        res.render('login', { title: "Login", error: errorMessage }); // ✅ FIXED
     }
 });
 
-router.get('/signup', (req, res) => res.render('signup'));
+// Render register page
+router.get("/register", (req, res) => {
+    res.render("register", { title: "Register", error: null });
+});
 
-router.post('/signup', async (req, res) => {
+// Handle registration
+router.post('/register', async (req, res) => {
     const { email, password } = req.body;
     try {
         await createUserWithEmailAndPassword(auth, email, password);
         res.redirect('/login');
     } catch (error) {
-        let errorMessage = "Signup failed: ";
+        let errorMessage = "Registration failed: ";
         if (error.code === 'auth/email-already-in-use') {
             errorMessage += "This email is already registered.";
         } else {
             errorMessage += error.message;
         }
-        res.render('signup', { error: errorMessage });
+        res.render('register', { title: "Register", error: errorMessage }); // ✅ FIXED
     }
 });
 

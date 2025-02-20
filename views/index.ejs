@@ -10,14 +10,13 @@
     <header>
         <h1>Welcome to the Doctor Booking System</h1>
         <nav>
-            <% if (user) { %>  <!-- If user is logged in -->
+            <% if (typeof user !== 'undefined' && user) { %> 
                 <a href="/dashboard">Dashboard</a>
                 <a href="/logout">Logout</a>
-            <% } else { %>  <!-- If user is not logged in -->
+            <% } else { %> 
                 <a href="/login">Login</a>
-                <a href="/signup">Sign Up</a>
+                <a href="/register">Register</a>
             <% } %>
-            <a href="/doctors">Find a Doctor</a>
         </nav>
     </header>
     <main>

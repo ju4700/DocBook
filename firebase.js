@@ -3,7 +3,7 @@ const { getFirestore } = require("firebase/firestore");
 const { getStorage } = require("firebase/storage");
 const dotenv = require("dotenv");
 
-dotenv.config();
+dotenv.config({ path: "./secure.env" }); 
 
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_API_KEY,
@@ -14,6 +14,8 @@ const firebaseConfig = {
   appId: process.env.FIREBASE_APP_ID,
   measurementId: process.env.FIREBASE_MEASUREMENT_ID,
 };
+
+console.log("Firebase Config:", firebaseConfig); 
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);

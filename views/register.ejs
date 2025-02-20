@@ -8,25 +8,29 @@
 </head>
 <body>
     <header>
-        <h1>Login</h1>
+        <h1>Register</h1>
     </header>
     <main>
-        <form action="/login" method="POST">
-            <% if (typeof error !== 'undefined' && error) { %> 
-                <div class="error-message">
-                    <p><%= error %></p>
-                </div>
-            <% } %>
-            
+        <% if (typeof error !== 'undefined' && error) { %>
+            <div class="error-message">
+                <p><%= error %></p>
+            </div>
+        <% } %>
+
+        <form action="/register" method="POST">
+            <label for="name">Name:</label>
+            <input type="text" name="name" required>
+
             <label for="email">Email:</label>
             <input type="email" name="email" required>
-    
+
             <label for="password">Password:</label>
             <input type="password" name="password" required>
-    
-            <button type="submit">Login</button>
+
+            <button type="submit">Register</button>
         </form>
-    </main>    
+        <p>Already have an account? <a href="/login">Login</a></p>
+    </main>
     <footer>
         <p>&copy; 2025 Doctor Booking System</p>
     </footer>
