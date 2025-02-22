@@ -4,31 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %></title>
-    <link rel="stylesheet" href="/public/styles.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Font (IBM Plex Sans) -->
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'IBM Plex Sans', sans-serif;
+        }
+    </style>
 </head>
-<body>
-    <header>
-        <h1>Login</h1>
-    </header>
-    <main>
-        <form action="/login" method="POST">
+<body class="bg-gradient-to-b from-blue-50 to-white flex items-center justify-center min-h-screen">
+
+    <div class="w-full max-w-md bg-white shadow-lg rounded-xl p-8">
+        <!-- Header -->
+        <header class="mb-6">
+            <h1 class="text-3xl font-extrabold text-blue-700 text-center">Login</h1>
+        </header>
+
+        <!-- Login Form -->
+        <main>
             <% if (typeof error !== 'undefined' && error) { %> 
-                <div class="error-message">
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded-md mb-4">
                     <p><%= error %></p>
                 </div>
             <% } %>
-            
-            <label for="email">Email:</label>
-            <input type="email" name="email" required>
+
+            <form action="/login" method="POST" class="space-y-4">
+                <div>
+                    <label for="email" class="block text-gray-700 font-medium">Email:</label>
+                    <input type="email" name="email" required 
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
     
-            <label for="password">Password:</label>
-            <input type="password" name="password" required>
+                <div>
+                    <label for="password" class="block text-gray-700 font-medium">Password:</label>
+                    <input type="password" name="password" required 
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
     
-            <button type="submit">Login</button>
-        </form>
-    </main>    
-    <footer>
-        <p>&copy; 2025 Doctor Booking System</p>
-    </footer>
+                <button type="submit" 
+                    class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
+                    Login
+                </button>
+            </form>
+
+            <p class="text-gray-600 text-center mt-4">Don't have an account? 
+                <a href="/register" class="text-blue-500 font-semibold hover:underline">Sign up</a>
+            </p>
+        </main>    
+    </div>
+
 </body>
 </html>

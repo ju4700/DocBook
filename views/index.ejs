@@ -17,41 +17,55 @@
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-900">
+<body class="bg-gradient-to-b from-blue-50 to-white text-gray-900">
 
-    <!-- Container for proper spacing -->
-    <div class="max-w-4xl mx-auto px-6 py-12">
+    <!-- Page Container -->
+    <div class="max-w-5xl mx-auto px-6 py-12">
 
         <!-- Header -->
-        <header class="bg-white shadow-md rounded-lg p-4 mb-8">
-            <div class="flex justify-between items-center">
-                <h1 class="text-3xl font-bold text-blue-600">Doctor Booking</h1>
-                <nav class="space-x-4">
-                    <% if (typeof user !== 'undefined' && user) { %> 
-                        <a href="/dashboard" class="text-gray-700 hover:text-blue-500">Dashboard</a>
-                        <a href="/logout" class="text-gray-700 hover:text-red-500">Logout</a>
-                    <% } else { %> 
-                        <a href="/login" class="text-gray-700 hover:text-blue-500">Login</a>
-                        <a href="/register" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">
-                            Sign Up
-                        </a>
-                    <% } %>
-                </nav>
-            </div>
+        <header class="bg-white shadow-md rounded-xl p-5 mb-10 flex justify-between items-center">
+            <h1 class="text-3xl font-extrabold text-blue-600">Doctor Booking</h1>
+            <nav class="space-x-4">
+                <% if (typeof user !== 'undefined' && user) { %> 
+                    <a href="/dashboard" class="text-gray-700 hover:text-blue-500 transition">Dashboard</a>
+                    <a href="/logout" class="text-gray-700 hover:text-red-500 transition">Logout</a>
+                <% } else { %> 
+                    <a href="/login" class="text-gray-700 hover:text-blue-500 transition">Login</a>
+                    <a href="/register" class="bg-blue-500 text-white px-5 py-2 rounded-lg hover:bg-blue-600 transition shadow-md">
+                        Sign Up
+                    </a>
+                <% } %>
+            </nav>
         </header>
 
-        <!-- Main Content -->
-        <main class="bg-white shadow-lg rounded-lg p-8 text-center">
-            <h2 class="text-4xl font-semibold">Book an Appointment</h2>
-            <p class="text-gray-600 mt-2">Browse through a list of highly qualified doctors and schedule your appointment online.</p>
-            <a href="/doctors" class="mt-6 inline-block bg-blue-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-600 transition">
+        <!-- Hero Section -->
+        <main class="bg-white shadow-xl rounded-2xl p-12 text-center">
+            <h2 class="text-5xl font-extrabold text-blue-700 leading-tight">Find the Best Doctors for You</h2>
+            <p class="text-gray-600 text-lg mt-4">Book appointments with top-rated doctors and receive the best medical care from the comfort of your home.</p>
+            <a href="/doctors" class="mt-8 inline-block bg-blue-500 text-white text-lg font-semibold px-8 py-3 rounded-full shadow-lg hover:bg-blue-600 transition">
                 Browse Doctors
             </a>
         </main>
 
+        <!-- Features Section -->
+        <section class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition">
+                <h3 class="text-2xl font-semibold text-blue-600">Qualified Doctors</h3>
+                <p class="text-gray-600 mt-2">Consult with experienced and certified professionals.</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition">
+                <h3 class="text-2xl font-semibold text-blue-600">24/7 Support</h3>
+                <p class="text-gray-600 mt-2">Book appointments and receive guidance anytime.</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition">
+                <h3 class="text-2xl font-semibold text-blue-600">Easy Booking</h3>
+                <p class="text-gray-600 mt-2">Schedule appointments in just a few clicks.</p>
+            </div>
+        </section>
+
         <!-- Footer -->
-        <footer class="text-center text-gray-500 text-sm mt-10">
-            <p>&copy; 2025 Doctor Booking System</p>
+        <footer class="text-center text-gray-500 text-sm mt-16">
+            <p>&copy; 2025 Doctor Booking System. All rights reserved.</p>
         </footer>
 
     </div>

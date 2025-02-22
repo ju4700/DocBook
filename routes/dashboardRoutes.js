@@ -1,6 +1,5 @@
 const express = require('express');
 const Booking = require('../models/Booking'); // Import Booking model
-const Doctor = require('../models/Doctor'); // Import Doctor model
 const router = express.Router();
 
 // Dashboard Route
@@ -10,17 +9,17 @@ router.get('/dashboard', async (req, res) => {
         return res.redirect('/login');
     }
 
-    const userId = req.session.user._id; // MongoDB uses _id instead of uid
+    const userId = req.session.user.id; // Use 'id' from session
 
     try {
-        // Fetch bookings for the logged-in user
+        // Fetch bookings for the logged-in user & populate doctor details
         const bookings = await Booking.find({ userId }).populate('doctorId');
 
         const formattedBookings = bookings.map(booking => ({
-            doctorName: booking.doctorId.name, // Assuming Doctor model has 'name' field
-            doctorSpecialization: booking.doctorId.specialization, // Ensure this field exists
+            doctorName: booking.doctorId?.name || "Unknown", // Handle missing doctor data
+            doctorSpecialization: booking.doctorId?.specialization || "Not specified",
             date: booking.date,
-            status: booking.status || 'Pending' // Default to 'Pending' if status is missing
+            status: booking.status || 'Pending'
         }));
 
         res.render('dashboard', { user: req.session.user, bookings: formattedBookings });

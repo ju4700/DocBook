@@ -17,52 +17,66 @@
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-900">
+<body class="bg-gradient-to-b from-blue-50 to-white text-gray-900">
 
     <!-- Page Container -->
-    <div class="max-w-4xl mx-auto px-6 py-12">
+    <div class="max-w-5xl mx-auto px-6 py-12">
 
         <!-- Header -->
-        <header class="bg-white shadow-md rounded-lg p-4 mb-8">
-            <div class="flex justify-between items-center">
-                <h1 class="text-2xl font-semibold text-blue-600">Welcome, <%= user.email %></h1>
-                <nav class="space-x-4">
-                    <a href="/doctors" class="text-gray-700 hover:text-blue-500">Find a Doctor</a>
-                    <a href="/bookings" class="text-gray-700 hover:text-blue-500">My Appointments</a>
-                    <a href="/notifications" class="text-gray-700 hover:text-blue-500">Notifications</a>
-                    <a href="/logout" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition">Logout</a>
-                </nav>
-            </div>
+        <header class="bg-white shadow-md rounded-xl p-5 mb-10 flex justify-between items-center">
+            <h1 class="text-3xl font-extrabold text-blue-600">Welcome, <%= user.name %> 👋</h1>
+            <nav class="space-x-4">
+                <a href="/doctors" class="text-gray-700 hover:text-blue-500 transition">Find a Doctor</a>
+                <a href="/bookings" class="text-gray-700 hover:text-blue-500 transition">My Appointments</a>
+                <a href="/notifications" class="text-gray-700 hover:text-blue-500 transition">Notifications</a>
+                <a href="/logout" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition">Logout</a>
+            </nav>
         </header>
 
-        <!-- Main Content -->
-        <main class="bg-white shadow-lg rounded-lg p-8">
-            <h2 class="text-3xl font-semibold text-center mb-4">Your Dashboard</h2>
-            <p class="text-gray-600 text-center mb-6">Manage your appointments and view notifications.</p>
+        <!-- User Profile Section -->
+        <section class="bg-white shadow-lg rounded-xl p-8">
+            <h2 class="text-4xl font-extrabold text-blue-700 text-center mb-6">Your Profile</h2>
+            <div class="text-gray-700 text-lg space-y-3">
+                <p><strong>Name:</strong> <%= user.name %></p>
+                <p><strong>Age:</strong> <%= user.age %></p>
+                <p><strong>Phone:</strong> <%= user.phone %></p>
+                <p><strong>Email:</strong> <%= user.email %></p>
+            </div>
+        </section>
 
-            <!-- Upcoming Appointments -->
-            <h3 class="text-2xl font-semibold mb-4">Upcoming Appointments</h3>
+        <!-- Upcoming Appointments Section -->
+        <section class="mt-10 bg-gray-100 shadow-lg rounded-xl p-8">
+            <h3 class="text-3xl font-bold text-blue-700 text-center mb-6">Upcoming Appointments</h3>
+            
             <% if (bookings.length > 0) { %>
-                <div class="grid gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     <% bookings.forEach(booking => { %>
-                        <div class="bg-gray-100 p-4 rounded-lg shadow-md">
-                            <h4 class="text-xl font-medium">Dr. <%= booking.doctorName %></h4>
-                            <p class="text-gray-600"><em><%= booking.doctorSpecialization %></em></p>
-                            <p class="mt-2"><strong>Appointment Date:</strong> <%= booking.date %></p>
-                            <p><strong>Status:</strong> <%= booking.status %></p>
+                        <div class="bg-white p-6 rounded-xl shadow-md border-l-4 
+                            <% if (booking.status === 'Confirmed') { %> border-green-500 <% } 
+                               else if (booking.status === 'Pending') { %> border-yellow-500 <% } 
+                               else { %> border-red-500 <% } %>">
+                            <h4 class="text-xl font-bold text-gray-900">Dr. <%= booking.doctorName %></h4>
+                            <p class="text-gray-600 mt-1"><strong>Specialization:</strong> <%= booking.doctorSpecialization %></p>
+                            <p class="text-gray-600 mt-1"><strong>Date:</strong> <%= booking.date %></p>
+                            <p class="mt-2 text-sm font-semibold 
+                                <% if (booking.status === 'Confirmed') { %> text-green-600 <% } 
+                                   else if (booking.status === 'Pending') { %> text-yellow-600 <% } 
+                                   else { %> text-red-600 <% } %>">
+                                Status: <%= booking.status %>
+                            </p>
                         </div>
                     <% }); %>
                 </div>
             <% } else { %>
                 <p class="text-gray-500 text-center">You don't have any upcoming appointments. Please 
-                    <a href="/doctors" class="text-blue-500 hover:underline">book a doctor</a>.
+                    <a href="/doctors" class="text-blue-500 font-semibold hover:underline">book a doctor</a>.
                 </p>
             <% } %>
-        </main>
+        </section>
 
         <!-- Footer -->
-        <footer class="text-center text-gray-500 text-sm mt-10">
-            <p>&copy; 2025 Doctor Booking System</p>
+        <footer class="text-center text-gray-500 text-sm mt-16">
+            <p>&copy; 2025 Doctor Booking System. All rights reserved.</p>
         </footer>
 
     </div>

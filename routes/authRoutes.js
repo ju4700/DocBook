@@ -33,7 +33,13 @@ router.post('/login', async (req, res) => {
         }
 
         // Store user session
-        req.session.user = { id: user._id, email: user.email };
+        req.session.user = { 
+            id: user._id, 
+            name: user.name, 
+            email: user.email, 
+            age: user.age,  
+            phone: user.phone 
+        };
         res.redirect('/dashboard');
     } catch (error) {
         console.error(error);
@@ -48,16 +54,30 @@ router.get("/register", (req, res) => {
 
 // Handle registration
 router.post('/register', async (req, res) => {
-    const { email, password } = req.body;
+    const { name, age, phone, email, password } = req.body;
+
+    // Validate input
+    if (!name || !age || !phone || !email || !password) {
+        return res.render('register', { title: "Register", error: "All fields are required." });
+    }
+
+    // Convert age to number
+    const ageNumber = parseInt(age, 10);
+    if (isNaN(ageNumber) || ageNumber <= 0) {
+        return res.render('register', { title: "Register", error: "Invalid age." });
+    }
+
     try {
-        const existingUser = await User.findOne({ email });
+        const existingUser = await User.findOne({ $or: [{ email }, { phone }] });
         if (existingUser) {
-            return res.render('register', { title: "Register", error: "This email is already registered." });
+            return res.render('register', { title: "Register", error: "Email or phone already registered." });
         }
 
         // Hash password before saving
         const hashedPassword = await bcrypt.hash(password, 10);
-        const newUser = new User({ email, password: hashedPassword });
+        
+        // Create new user with additional fields
+        const newUser = new User({ name, age: ageNumber, phone, email, password: hashedPassword });
         await newUser.save();
 
         res.redirect('/login');
@@ -66,6 +86,9 @@ router.post('/register', async (req, res) => {
         res.render('register', { title: "Register", error: "An error occurred. Please try again." });
     }
 });
+
+module.exports = router;
+
 
 // Logout route
 router.get('/logout', (req, res) => {

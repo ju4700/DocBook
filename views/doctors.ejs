@@ -3,41 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doctors</title>
-    <link rel="stylesheet" href="/public/styles.css">
+    <title>Available Doctors</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Font (IBM Plex Sans for a professional medical feel) -->
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'IBM Plex Sans', sans-serif;
+        }
+    </style>
 </head>
-<body>
-    <header>
-        <h1>Available Doctors</h1>
-        <nav>
-            <a href="/dashboard">Dashboard</a>
-            <a href="/bookings">My Appointments</a>
-            <a href="/notifications">Notifications</a>
-            <a href="/logout">Logout</a>
-        </nav>
-    </header>
+<body class="bg-gradient-to-b from-blue-50 to-white text-gray-900">
 
-    <main>
-        <h2>Find a Doctor</h2>
+    <!-- Page Container -->
+    <div class="max-w-6xl mx-auto px-6 py-12">
 
-        <% if (doctors.length === 0) { %>
-            <p>No doctors available at the moment. Please check back later.</p>
-        <% } else { %>
-            <ul class="doctor-list">
-                <% doctors.forEach(doctor => { %>
-                    <li class="doctor-card">
-                        <h3>Dr. <%= doctor.name %></h3>
-                        <p><strong>Specialization:</strong> <%= doctor.specialization %></p>
-                        <p><strong>Experience:</strong> <%= doctor.experience %> years</p>
-                        <a href="/bookings/new/<%= doctor.id %>" class="book-btn">Book Appointment</a>
-                    </li>
-                <% }); %>
-            </ul>
-        <% } %>
-    </main>
+        <!-- Header -->
+        <header class="bg-white shadow-md rounded-xl p-5 mb-10 flex justify-between items-center">
+            <h1 class="text-3xl font-extrabold text-blue-600">Available Doctors</h1>
+            <nav class="space-x-4">
+                <a href="/dashboard" class="text-gray-700 hover:text-blue-500 transition">Dashboard</a>
+                <a href="/bookings" class="text-gray-700 hover:text-blue-500 transition">My Appointments</a>
+                <a href="/notifications" class="text-gray-700 hover:text-blue-500 transition">Notifications</a>
+                <a href="/logout" class="text-gray-700 hover:text-red-500 transition">Logout</a>
+            </nav>
+        </header>
 
-    <footer>
-        <p>&copy; 2025 Doctor Booking System</p>
-    </footer>
+        <!-- Main Content -->
+        <main>
+            <h2 class="text-4xl font-extrabold text-blue-700 text-center mb-6">Find a Doctor</h2>
+
+            <% if (doctors.length === 0) { %>
+                <p class="text-gray-600 text-center">No doctors available at the moment. Please check back later.</p>
+            <% } else { %>
+                <!-- Doctors Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <% doctors.forEach(doctor => { %>
+                        <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition border-l-4 border-blue-500">
+                            <h3 class="text-2xl font-bold text-blue-600">Dr. <%= doctor.name %></h3>
+                            <p class="text-gray-700 mt-2"><strong>Designation:</strong> <%= doctor.designation %></p>
+                            <p class="text-gray-600"><strong>Department:</strong> <%= doctor.department %></p>
+                            <p class="text-gray-600"><strong>Specialization:</strong> <%= doctor.specialization %></p>
+                            <p class="text-gray-600"><strong>Experience:</strong> <%= doctor.experience %> years</p>
+                            <p class="text-gray-600"><strong>Qualifications:</strong> <%= doctor.qualifications.join(", ") %></p>
+
+                            <center><a href="/bookings/new/<%= doctor._id %>" class="mt-4 inline-block bg-blue-500 text-white text-lg font-semibold px-6 py-2 rounded-lg shadow-md hover:bg-blue-600 transition">
+                                Book Appointment
+                            </a></center>
+                        </div>
+                    <% }); %>
+                </div>
+            <% } %>
+        </main>
+
+        <!-- Footer -->
+        <footer class="text-center text-gray-500 text-sm mt-16">
+            <p>&copy; 2025 Doctor Booking System. All rights reserved.</p>
+        </footer>
+
+    </div>
+
 </body>
 </html>
